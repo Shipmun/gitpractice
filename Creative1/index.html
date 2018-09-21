@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photo Finder</title>
+    <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    
+        <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="scripts.js"></script>
+</head>
+    <body class="bodyClass">
+        <div class="overrides">
+            <div class="container-fluid pageHead">
+                <h1 class="display-1">
+                    Photo Finder
+                </h1>
+
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-8 imageSide left" id="imageSide">
+                        <div class="imageCard left" id="imageCard">
+                            <br>
+                            <h3 class="display-3">Welcome to Photo Finder!</h3>
+                            <p>Click on a blue dot on the map to see a photo taken there!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 imageSide right" id="imageSide">
+                        <img class="imageCard right" id="img_ID" src="CampusImage.PNG" usemap="#map" border="0" height="100%" alt="" />
+                        <map id="map_ID" name="map">
+                            <area id="stadium" shape="circle" coords="35,17,5" href="#" alt="stadium" title="Stadium" />
+                            <area id="tanner" shape="circle" coords="53,88,5" href="#" alt="tanner" title="Tanner" />
+                            <area id="SAB" shape="circle" coords="20,136,5" href="#" alt="Student Athelete Building" title="STB" />
+
+                            <area id="LSB" shape="circle" coords="65,145,5" href="#" alt="LSB" title="LSB" />
+                            <area id="SWKT" shape="circle" coords="66,121,5" href="#" alt="SWKT" title="SWKT" />
+                            <area id="BNSN" shape="circle" coords="64,134,5" href="#" alt="BNSN" title="BNSN" />
+
+                            <area id="HBLL" shape="circle" coords="74,106,5" href="#" alt="HBLL" title="HBLL" />
+                            <area id="QUAD" shape="circle" coords="75,94,5" href="#" alt="QUAD" title="QUAD" />
+                            <area id="marriott" shape="circle" coords="81,65,5" href="#" alt="marriott" title="Marriott" />
+
+                            <area id="BYUstore" shape="circle" coords="87,108,5" href="#" alt="BYU store" title="BYU Store" />
+                            <area id="WILK" shape="circle" coords="110,117,5" href="#" alt="Wilk" title="Wilk" />
+                            <area id="Creamery" shape="circle" coords="125,92,5" href="#" alt="Creamery" title="Creamery" />
+                            
+                            <area id="MOA" shape="circle" coords="83,87,5" href="#" alt="moa" title="MOA" />
+                            <area id="bean" shape="circle" coords="98,56,5" href="#" alt="moa" title="MOA" />
+
+
+                        </map>
+                    </div>
+                        
+                </div>
+            </div>
+            <p style="text-align:center;"><font color="gray">
+                If you are unable to click on the blue dots, please refresh page
+            </font>
+              </p>
+            <div class="footer">
+                Jace Chipman and Danielle Thueson
+            </div>
+        </div>
+    </body>
+    <script>
+        window.onload = function () {
+            var ImageMap = function (map, img) {
+                    var n,
+                        areas = map.getElementsByTagName('area'),
+                        len = areas.length,
+                        coords = [],
+                        previousWidth = 128;
+                    for (n = 0; n < len; n++) {
+                        coords[n] = areas[n].coords.split(',');
+                    }
+                    this.resize = function () {
+                        var n, m, clen,
+                            x = img.offsetWidth / previousWidth;
+                        for (n = 0; n < len; n++) {
+                            clen = coords[n].length;
+                            for (m = 0; m < clen; m++) {
+                                coords[n][m] *= x;
+                            }
+                            areas[n].coords = coords[n].join(',');
+                        }
+                        previousWidth = document.body.clientWidth;
+                        return true;
+                    };
+                    window.onresize = this.resize;
+                },
+                imageMap = new ImageMap(document.getElementById('map_ID'), document.getElementById('img_ID'));
+            imageMap.resize();
+            return;
+        }
+        
+        document.getElementById("LSB").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="LSB.JPG" alt=LSB width=90%><p>Life Science Building</p>'
+        }
+        document.getElementById("stadium").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="stadium.jpg" alt=stadium height=93%><p>Lavell Edwards Stadium</p>'
+        }
+        document.getElementById("Creamery").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="creamery.jpg" alt=creamery height=93%><p>BYU Creamery on 9th</p>'
+        }
+        document.getElementById("tanner").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="tanner.jpg" alt=tanner height=93%><p>N. Eldon Tanner Building</p>'
+        }
+        document.getElementById("HBLL").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="hbll.JPG" alt=hbll height=93%><p>Harold B. Lee Library</p>'
+        }
+        document.getElementById("SWKT").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="SWKT.jpg" alt=swkt height=93%><p>Spencer W. Kimball Tower</p>'
+        }
+        document.getElementById("SAB").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="sab.jpg" alt=sab height=93%><p>Student Athlete Buiding</p>'
+        }
+        document.getElementById("BNSN").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="bnsn.JPG" alt=stb height=93%><p>Benson Building</p>'
+        }
+        document.getElementById("BYUstore").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="bookstore.jpg" alt=stb height=93%><p>BYU Store</p>'
+        }
+        document.getElementById("MOA").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="art.JPG" alt=moa height=93%><p>Museum of Art</p>'
+        }
+        document.getElementById("QUAD").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="quad.JPG" alt=moa height=93%><p>The Quad</p>'
+        }
+        document.getElementById("WILK").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="wilk.jpg" alt=moa height=93%><p>Wilkinson Student Center</p>'
+        }
+        document.getElementById("marriott").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="marriott.jpg" alt=moa height=93%><p>The Marriot Center Walkway</p>'
+        }
+        document.getElementById("bean").onclick = function(e) {
+            e.preventDefault();
+            console.log("string");
+            document.getElementById("imageCard").innerHTML = '<img src="bean.JPG" alt=bean height=93%><p>The Bean Museum</p>'
+        }
+    </script>
+</html>
